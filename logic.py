@@ -16,10 +16,17 @@ def get_winner(board):
     for player in ['X', 'O']:
         # Check rows, columns, and diagonals for a win
         for i in range(3):
-            if all(board[i][j] == player for j in range(3)) or all(board[j][i] == player for j in range(3)):
+            row_win = all(board[i][j] == player for j in range(3))
+            col_win = all(board[j][i] == player for j in range(3))
+
+            if row_win or col_win:
                 return player
-        if all(board[i][i] == player for i in range(3)) or all(board[i][2 - i] == player for i in range(3)):
-            return player
+
+            diag1_win = all(board[i][i] == player for i in range(3))
+            diag2_win = all(board[i][2 - i] == player for i in range(3))
+
+            if diag1_win or diag2_win:
+                return player
     return None
 
 def other_player(player):
